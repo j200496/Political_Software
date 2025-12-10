@@ -1,4 +1,13 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.db
+*.log
+.vs/
 
 # Compiled output
 /dist
