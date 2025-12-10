@@ -12,6 +12,7 @@ private urlpersonas = 'https://localhost:7052/api/Personas';
 private urlprovincias = "https://localhost:7052/api/Provicias";
 private totalmiembros = "https://localhost:7052/api/Personas/total";
 private urlchart = 'https://localhost:7052/api/Provicias/miembros-p-provincia';
+private urllistaprovincias = 'https://localhost:7052/api/Personas/Prov';
 
 
 http = inject(HttpClient);
@@ -19,6 +20,12 @@ route = inject(Router);
 
 Charts(): Observable<any>{
   return this.http.get<any>(this.urlchart);
+}
+GettotalMiembrosPorUsuario(id:number){
+  return this.http.get<any>(`${this.urlpersonas}/Totalppu?id=${id}`);
+}
+GetPPU(id:number){
+  return this.http.get<any>(`${this.urlpersonas}/Selectppu?id=${id}`);
 }
 TotalMiembros(): Observable<any>{
   return this.http.get<number>(this.totalmiembros);
@@ -33,13 +40,31 @@ FiltrarPersonas(nombre: string) {
   return this.http.get<any[]>(`${this.urlpersonas}/filter?name=${nombre}`);
 }
 GetProvincias(){
-  return this.http.get<any>(this.urlprovincias);
+  return this.http.get<any>(this.urllistaprovincias);
 }
  warning(title:string, text:string, btncolor:string){
 return Swal.fire({
   title: title,
   text: text,
   icon: 'warning',
+  confirmButtonText:'aceptar',
+  confirmButtonColor: btncolor,
+});
+ }
+  error(title:string, text:string, btncolor:string){
+return Swal.fire({
+  title: title,
+  text: text,
+  icon: 'error',
+  confirmButtonText:'aceptar',
+  confirmButtonColor: btncolor,
+});
+ }
+  success(title:string, text:string, btncolor:string){
+return Swal.fire({
+  title: title,
+  text: text,
+  icon: 'success',
   confirmButtonText:'aceptar',
   confirmButtonColor: btncolor,
 });

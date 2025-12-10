@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormComponent } from "../../Shared/form/form.component";
-import { HeaderComponent } from "../header/header.component";
 import { PersonasService } from '../../services/personas.service';
-import { FooterComponent } from '../../Shared/footer/footer.component';
+
 
 @Component({
   selector: 'app-home',

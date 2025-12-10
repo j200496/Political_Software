@@ -1,72 +1,121 @@
 <div class="container">
-<div class="row mt-3">
+  <div class="row mt-3">
     <div class="col-lg-7 mt-3">
-        <div class="shadow">
-  <div class="card">
-            <div class="card-header bg-primary">
-                <h5 class="text-center text-white">Usuarios</h5>
+      <div class="shadow">
+        <div class="card">
+          <div class="card-header bg-success">
+            <h5 class="text-center text-white">Usuarios <i class="bi bi-people-fill"></i></h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive border rounded p-2 mb-3"
+          style="max-height: 350px; overflow-y: auto">
+               <table class="table table-striped">
+              <thead class="bg-success">
+                <tr class="text-center">
+                  <th>Usuario</th>
+                  <th>Contraseña</th>
+                  <th>Rol</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (u of usuarios; track u.idUsuario) {
+                <tr class="text-center">
+                  <td>{{ u.usuario }}</td>
+                  <td>{{ u["contraseña"] }}</td>
+                  <td>{{ u.rol }}</td>
+                  <td class="d-flex gap-2 justify-content-center">
+                    <button
+                      class="btn btn-success btn-md"
+                      (click)="getuser(u.idUsuario)"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      (click)="Borraruser(u.idUsuario)"
+                    >
+                      Borrar
+                    </button>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
             </div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead class="bg-success">
-                        <tr class="text-center">
-                            <th>Usuario</th>
-                            <th>Contraseña</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                      <tbody>
-                         @for (u of usuarios; track u.idUsuario) {
-      <tr class="text-center">
-        <td>{{ u.usuario }}</td>
-        <td>{{ u['contraseña'] }}
-</td>
-<td>{{u.rol}}</td>
-        <td class="d-flex gap-2 justify-content-center">
-          <button class="btn btn-success btn-md"(click)="getuser(u.idUsuario)">Editar</button>
-                  <button class="btn btn-danger " type="button"(click)="Borraruser(u.idUsuario)">Borrar</button>
-        </td>
-      </tr>
-    }
-                      </tbody>
-                    
-                </table>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
     <div class="col-lg-5 mt-3">
-        <div class="shadow">
-  <div class="card">
-            <div class="card-header bg-primary text-white text-center">
-                <h5>Configuracion de usuario</h5>
-            </div>
-            <div class="card-body">
-                <form [formGroup]="form" (ngSubmit)="Guardar()">
-                <label for="usuario">Usuario</label>
-              <input type="text" id="usuario" formControlName="usuario" class="form form-control" placeholder="Usuario">
-                 <label for="clave">Contraseña</label>
-              <input type="text" id="clave" formControlName="contraseña" class="form form-control mt-2" placeholder="Contraseña">
+      <div class="shadow">
+        <div class="card">
+          <div class="card-header bg-success text-white text-center">
+            <h5>Configuracion de usuario <i class="bi bi-person-fill-gear"></i></h5>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="Guardar()">
+              <label for="usuario">Usuario</label>
+              <input
+                type="text"
+                id="usuario"
+                formControlName="usuario"
+                class="form form-control"
+                placeholder="Usuario"
+              />
+              <label for="clave">Contraseña</label>
+              <input
+                type="text"
+                id="clave"
+                formControlName="contraseña"
+                class="form form-control mt-2"
+                placeholder="Contraseña"
+              />
               <label for="rol">Rol</label>
-              <select name="" id="rol" formControlName="rol" class="form form-control">
-                 <option value="Selecciona un rol">Selecciona un rol</option>
+              <select
+                name=""
+                id="rol"
+                formControlName="rol"
+                class="form form-control"
+              >
+                <option value="Selecciona un rol">
+                  Selecciona un rol
+                </option>
                 <option value="Administrador">Administrador</option>
-                <option value="Empleado">Empleado</option>
+                <option value="Equipo">Equipo</option>
               </select>
               <div class="row mt-2">
                 <div class="col-6">
-                    <button class="btn btn-success w-100" *ngIf="isupdate" type="submit">Actualizar</button>
-                    <button class="btn btn-primary w-100" *ngIf="!isupdate" type="submit">Guardar</button>
+                  <button *ngIf="isupdate"
+                    class="btn btn-success w-100"
+                    
+                    type="submit"
+                  >
+                    Actualizar
+                  </button>
+                  <button *ngIf="!isupdate"
+                    class="btn btn-primary w-100"
+                    
+                    type="submit"
+                  >
+                    Guardar
+                  </button>
                 </div>
                 <div class="col-6">
-                    <button class="btn btn-danger w-100" routerLink="/layout/admin">Cancelar</button>
+                  <button
+                    class="btn btn-danger w-100"
+                    type="button"
+                    (click)="Clear()"
+                  >
+                    Cancelar
+                  </button>
                 </div>
               </div>
-              </form>
-            </div>
+            </form>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>

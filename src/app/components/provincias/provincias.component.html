@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row justify-content-start mt-4">
+    <div class="col-5">
+      <div class="shadow">
+        <div class="card">
+          <div class="card-header text-center text-white bg-success">
+            <h5>Lista de territorios <i class="bi bi-geo-alt-fill"></i></h5>
+          </div>
+          <div class="card-body">
+            <div
+              class="table-responsive border rounded p-2 mb-3"
+              style="max-height: 350px; overflow-y: auto"
+            >
+              <table class="table table-striped">
+                <thead class="bg-success">
+                  <tr>
+                    <th>Territorio</th>
+                    <th class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let p of provincias">
+                    <td>{{ p.nombre }}</td>
+                    <td>
+                      <div class="d-flex gap-2 ms-5">
+                        <button
+                          class="btn btn-success"
+                          (click)="GetProvincia(p.idProvincia)"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          class="btn btn-danger"
+                          (click)="Borrar(p.idProvincia)"
+                        >
+                          Borrar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="shadow">
+        <form [formGroup]="form">
+          <div class="card">
+            <div class="card-header bg-success text-white text-center">
+              <h6>Configuracion <i class="bi bi-gear-fill"></i></h6>
+            </div>
+            <div class="card-body">
+              <div class="container">
+                <div class="row">
+                  <label for="nombre">Territorio</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    formControlName="nombre"
+                    class="form form-control"
+                    placeholder="Ejemplo: Santo Domingo"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-primary w-100" *ngIf="!isUpdate" (click)="AgregarProv()">
+                    Agregar
+                  </button>
+                    <button class="btn btn-success w-100" *ngIf="isUpdate">
+                    Actualizar
+                  </button>
+                  <button class="btn btn-danger w-100" (click)="Cancelar()">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

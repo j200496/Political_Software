@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+  <div class="shadow">
+    <div class="card">
+      <div class="card-header bg-success text-center text-white">
+        <h6>Lista de {{ list }}</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive border rounded p-2 mb-3"
+          style="max-height: 250px; overflow-y: auto">
+         <div *ngFor="let item of datos">
+  <label>
+    <input
+      type="checkbox"
+      [checked]="checkedMap[item[IdField]]"
+      (change)="toggle(item[IdField], $event)"
+    />
+    {{ item[TextField] }}
+  </label>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PersonasService } from '../../services/personas.service';
+import { AuthService } from '../../services/authservice.service';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +12,34 @@ import { PersonasService } from '../../services/personas.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-route = inject(Router);
-user: string ="";
-pass: string = "";
-service = inject(PersonasService);
-  login(){
-if(this.user == 'admin' && this.pass == 'admin'){
-  this.route.navigateByUrl("/layout/admin")
+usuario = '';
+contrasena = '';
+mensajeError = '';
+loading = false;
+  alert = inject(PersonasService)
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
+
+  login() {
+  const body = {
+  usuario: this.usuario,
+  contraseña: this.contrasena  
+};
+if(this.usuario == "" || this.contrasena == ""){
+this.alert.error("Campos vacios!", "Por favor verifique los campos","red");
+return;
 }
-else{
-this.service.warning("Error","Credenciales incorrectas","red");
-}
-}
+  this.loading = true;
+  this.auth.login(body).subscribe({
+      next: () => {
+          this.loading = false;
+        this.router.navigate(['layout/admin']);
+      },
+      error: () => {
+        this.mensajeError = 'Usuario o clave incorrectos';
+      }
+    });
+  }
 }

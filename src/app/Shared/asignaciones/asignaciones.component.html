@@ -1,0 +1,10 @@
+<select class="form-control" (change)="onSelect($event)">
+  <option value="0">Lista de usuarios</option>
+
+  @for(u of data; track u[idField]) {
+    <option [value]="u[idField]">{{ u[textField] }}</option>
+  }
+</select>
+
+
+    

@@ -1,25 +1,72 @@
- <nav class="navbar navbar-expand-lg bg-primary" id="inicio">
-        <div class="container-fluid">
-         
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" routerLink="/layout/usuarios">Usuarios</a>
-              </li>
-               <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" routerLink="/layout/admin">Admin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" routerLink="/layout/home">Agregar miembro</a>
-              </li>   
-                    <li class="nav-item">
-                <a class="nav-link text-white" (click)="logoff()" >Log out</a>
-              </li>  
-            </ul>
-            
-          </div>
-        </div>
-      </nav>
+<nav
+  class="navbar navbar-expand-lg"
+  style="background-color: rgb(6, 165, 72)"
+  id="inicio"
+>
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+     <span class="navbar-brand text-white fw-bold fst-italic ms-2">
+    <img src="/images/logofupu.png" style="border-radius: 50%; object-fit: cover;" width="60" height="50" alt=""> 
+    </span>
+    <span class="nav-link active text-white fw-bold fst-italic">
+                 <h5>Plataforma Joel Diaz</h5>
+             </span>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a *ngIf="admin"
+            class="nav-link active text-white"
+            aria-current="page"
+            routerLink="/layout/usuarios"
+            >Configuracion de Usuarios</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-white"
+            aria-current="page"
+            routerLink="/layout/home"
+            >Agregar miembro</a
+          >
+        </li>
+        <li>
+          <a *ngIf="admin"
+            class="nav-link active text-white"
+            aria-current="page"
+            routerLink="/layout/provincias"
+            >Agregar territorios</a
+          >
+        </li>
+            <li>
+          <a *ngIf="admin"
+            class="nav-link active text-white"
+            aria-current="page"
+            routerLink="/layout/asgprov"
+            >Asignaciones</a
+          >
+        </li>
+             <li class="nav-item">
+          <a
+            class="nav-link active text-white"
+            aria-current="page"
+            routerLink="/layout/admin"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" (click)="logoff()">Salir</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

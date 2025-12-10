@@ -25,7 +25,7 @@ export type ChartOptions = {
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
-  
+   total!: number;
   @ViewChild("chart") chart!: ChartComponent;  
 
 public chartOptions: ChartOptions = {
@@ -38,7 +38,7 @@ public chartOptions: ChartOptions = {
   service = inject(PersonasService);
   router = inject(Router);
 
-  total!: number;
+
 
   ngOnInit(): void {
     this.service.TotalMiembros().subscribe(m =>{
@@ -67,4 +67,13 @@ public chartOptions: ChartOptions = {
       }
     });
   }
+
+ /* <apx-chart
+  #chart
+  [series]="chartOptions.series || []"   
+  [chart]="chartOptions.chart"
+  [xaxis]="chartOptions.xaxis"
+  [title]="chartOptions.title">
+</apx-chart>
+*/
 }

@@ -1,44 +1,182 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-6 col-8 col-md-8">
-      <h1 class="text-primary mt-4 mb-4 fw-bold" style="font-family:Georgia, 'Times New Roman', Times, serif;">Panel administrador</h1>
+  <div *ngIf="admin" class="row justify-content-center">
+    <div class="col-lg-5 col-10 col-md-8">
+      <h1
+        class="text-success mt-4 mb-4 fw-bold"
+        style="font-family: Georgia, 'Times New Roman', Times, serif"
+      >
+        Panel administrador
+      </h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-    <app-charts></app-charts>
+  <div *ngIf="admin" class="row justify-content-start">
+    <div class="col-lg-10">
+      <h5 class="fst-italic">Bienvenido: compañero(a) {{ usuario }}</h5>
+    </div>
+  </div>
+  <div *ngIf="admin" class="row justify-content-end">
+    <div class="col-lg-4">
+      <div class="shadow-lg">
+        <div class="bg-success text-white rounded-3">
+          <h5 style="padding: 8%">
+            <i class="bi bi-people-fill fs-3"></i> Miembros inscritos
+            {{ TotalMiembro }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="admin" class="row justify-content-center">
+    <div class="col-lg-4 col-9 col-md-4">
+      <h3 class="text-success mt-4 mb-4 fst-italic">
+        Lista de todos los miembros
+      </h3>
+    </div>
+  </div>
+  <div *ngIf="admin" class="row justify-content-start mb-2">
+    <div class="col-lg-6 col-md-6 mt-4">
+    <input
+  [(ngModel)]="pleople"
+  (input)="FindName()"
+  class="form form-control"
+  type="text"
+  placeholder="Buscar por nombre"
+/>
+    </div>
+    <div class="col-lg-6 col-12 col-md-6 ps-3">
+      <label for="bprov">Buscar por territorios</label>
+      <ng-select
+        id="bprov"
+        class="form form-control"
+        [items]="provincias"
+        bindLabel="nombre"
+        bindValue="nombre"
+        placeholder=""
+        [(ngModel)]="buscarprov"
+        (change)="FindTerritory()"
+        [searchable]="true"
+        clearAllText="Clear"
+      >
+      </ng-select>
     </div>
   </div>
   <div class="row justify-content-center">
+    <div class="col-lg-12 col-12">
+      <div
+        class="table-responsive border"
+        style="max-height: 750px; overflow-y: auto"
+      >
+        <table *ngIf="admin" id="TablaPersonas" class="table table-hover mt-4">
+          <thead class="">
+            <tr class="">
+              <th>Nombre</th>
+              <th>Telefono</th>
+              <th>Direccion</th>
+              <th>Colegio electoral</th>
+              <th>Territorio</th>
+              <th>Usuario</th>
+              <th class="no-export" style="padding-left: 5%">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(p of FindPeople; track p.idPersona){
+            <tr>
+              <td>{{ p.nombre }}</td>
+              <td>{{ p.telefono }}</td>
+              <td>{{ p.direccion }}</td>
+              <td>{{ p.cedula }}</td>
+              <td>{{ p.provincia }}</td>
+              <td>{{ p.usuario }}</td>
+              <td class="d-flex gap-2 no-export">
+                <button
+                  class="btn btn-success"
+                  routerLink="/layout/update/{{ p.idPersona }}"
+                >
+                  Editar
+                </button>
+                <button class="btn btn-danger" (click)="borrar(p.idPersona)">
+                  Borrar
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="admin" class="row justify-content-center">
+        <div class="col-lg-6">
+          <button
+            class="btn btn-success mt-3 mb-5 w-100"
+            (click)="ExportToExcel()"
+          >
+            <i class="bi bi-file-earmark-arrow-down-fill"></i> Descargar a excel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!admin" class="row justify-content-center">
+    <div class="col-lg-5 col-8 col-md-8">
+      <h1
+        class="text-success mt-4 mb-4 fw-bold"
+        style="font-family: Georgia, 'Times New Roman', Times, serif"
+      >
+        Panel del compañero
+      </h1>
+    </div>
+  </div>
+  <div *ngIf="!admin" class="row justify-content-start">
+    <div class="col-lg-10">
+      <h5 class="fst-italic">Bienvenido: Compañero(a) {{ usuario }}</h5>
+    </div>
+  </div>
+  <div *ngIf="!admin" class="row justify-content-end">
+    <div class="col-lg-4">
+      <div class="shadow-lg">
+        <div class="bg-success text-white rounded-3">
+          <h5 style="padding: 8%">
+            <i class="bi bi-people-fill fs-3"></i> Miembros inscritos
+            {{ total }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!admin" class="row justify-content-center">
     <div class="col-lg-4 col-md-4">
-      <h3 class="text-primary mt-4 mb-4 fst-italic">Lista de miembros</h3>
+      <h3 class="text-success mt-4 mb-4 fst-italic">
+        Lista de todos tus miembros
+      </h3>
     </div>
   </div>
-  <div class="row justify-content-start mb-2">
+  <div *ngIf="!admin" class="row justify-content-start mb-2">
     <div class="col-lg-6 col-md-6 mt-4">
       <input
-        [(ngModel)]="Buscar"
-        (input)="BuscarPersonas(Buscar)"
+      [(ngModel)]="pers"
+      (input)="FindPerId()"
         class="form form-control"
         type="text"
         placeholder="Buscar por nombre"
       />
     </div>
     <div class="col-lg-6 col-md-6 ps-5">
-        <label for="bprov">Buscar por provincias</label>
-   <ng-select id="bprov" class="form form-control"
-  [items]="provincias"
-  bindLabel="nombre"
-  bindValue="nombre"
-  placeholder=""
-  [(ngModel)]="buscarprov"
-  (change)="FiltrarProvincias(buscarprov)"
-  [searchable]="true"
-  clearAllText="Clear">
-</ng-select>
+      <label for="bprov">Buscar por territorios</label>
+      <ng-select
+        id="bprov"
+        class="form form-control"
+        [items]="propid"
+        bindLabel="nombre"
+        bindValue="nombre"
+        placeholder=""
+        [(ngModel)]="buscarprov"
+        (change)="FindTerritoryPID()"
+        [searchable]="true"
+        clearAllText="Clear"
+      >
+      </ng-select>
     </div>
   </div>
-  <div class="row justify-content-center">
+  <div *ngIf="!admin" class="row justify-content-center">
     <div class="col-lg-12 col-12">
       <div
         class="table-responsive border"
@@ -50,13 +188,13 @@
               <th>Nombre</th>
               <th>Telefono</th>
               <th>Direccion</th>
-              <th>Cedula</th>
-              <th>Provincia</th>
+              <th>Colegio electoral</th>
+              <th>Territorio</th>
               <th class="no-export" style="padding-left: 5%">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            @for(p of personas; track p.idPersona){
+            @for(p of PeoplePerId; track p.idPersona){
             <tr>
               <td>{{ p.nombre }}</td>
               <td>{{ p.telefono }}</td>

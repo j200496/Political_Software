@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h3 class="text-success mt-4">
+                Asignaciones de usuarios
+            </h3>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+          <div class="col-4">
+   <app-asignaciones Lista="Lista de territorios" [data]="provincias"></app-asignaciones>
+  </div>
+   <div class="col-5">
+      <div class="shadow">
+    <div class="card">
+      <div class="card-header bg-success text-center text-white">
+        <h6>Lista de usuarios</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive border rounded p-2 mb-3"
+          style="max-height: 250px; overflow-y: auto">
+                 @for( u of usuarios; track u.IdUsuario){
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+             [value]="u.IdUsuario"
+            id="checkDefault"
+
+          />
+          <label class="form-check-label" for="checkDefault">
+           {{u.usuario}}
+          </label>
+        </div>
+      }
+        </div>
+      </div>
+    </div>
+  </div>
+   </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-6">
+            <button class="btn btn-primary w-100">Asignar <i class="bi bi-check-lg"></i></button>
+        </div>
+    </div>
+</div>

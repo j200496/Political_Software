@@ -11,26 +11,39 @@ import { ChartsComponent } from "../charts/charts.component";
 import { CommonModule } from '@angular/common';
 import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { FormComponent } from '../../Shared/form/form.component';
+import { AuthService } from '../../services/authservice.service';
+import { ProvinciasService } from '../../services/provincias.service';
 
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent, ChartsComponent,FooterComponent],
+  imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent,FooterComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
 export class AdminComponent implements OnInit{
-
+provservice = inject(ProvinciasService)
 TotalMiembro: number = 0;
-
+auth = inject(AuthService)
+usuario = this.auth.getUserName();
+idusuario = Number(this.auth.GetIdUsuario());
+admin = this.auth.isAdmin();
+total!: number;
 ngOnInit(): void {
   this.getpersonas();
   this.Cantmiembros();
   this.GetProv();
+  this.SelectPPU();
+  this.GetProvpid();
+  this.TotalMiembrosPorUs();
+  //console.log(this.personas)
+  //this.Find();
+
 }
 service = inject(PersonasService);
 //Miembros
-personas: any = [];
+personas: any[] = [];
+personaspu: any[] = [];
 Buscar:string = "";
 //Provincias 
 provincias: any = [];  
@@ -38,6 +51,69 @@ buscarprov!: string;
 provselect: any = []; 
 provfiltradas!: any;;
 prov: any = []; 
+propid: any = [];
+
+pleople: string = "";
+FindPeople: any[] = [];
+FindName(){
+  const word = this.pleople.toLowerCase().trim();
+  this.FindPeople = this.personas.filter((p:any) =>
+    p.nombre.toLowerCase().includes(word)
+  );
+}
+
+FindTerritory(){
+  if(this.buscarprov == null){
+    this.getpersonas()
+  }
+const prov = this.buscarprov.toLowerCase().trim();
+this.FindPeople = this.personas.filter((t:any) => 
+  t.provincia.toLowerCase().includes(prov)
+);
+
+}
+getpersonas(){
+this.service.getpersonas().subscribe(data =>{
+  this.personas = data;
+  this.FindPeople = [...this.personas]
+})
+}
+pers: string = "";
+PeoplePerId: any[] = [];
+FindPerId(){
+  const per = this.pers.toLowerCase().trim();
+  this.PeoplePerId = this.personaspu.filter((p:any) => 
+    p.nombre.toLowerCase().includes(per)
+  );
+}
+FindTerritoryPID(){
+  if(this.buscarprov == null){
+    this.SelectPPU()
+  }
+const prov = this.buscarprov.toLowerCase().trim();
+this.PeoplePerId = this.personaspu.filter((t:any) => 
+  t.provincia.toLowerCase().includes(prov)
+);
+  }
+SelectPPU(){
+this.service.GetPPU(this.idusuario).subscribe( p => {
+  this.personaspu = p;
+  //console.log('ID Usuario:', this.auth.GetIdUsuario());
+  this.PeoplePerId = [...this.personaspu]
+
+})
+}
+TotalMiembrosPorUs(){
+  this.service.GettotalMiembrosPorUsuario(this.idusuario).subscribe(t => {
+    this.total = t;
+  })
+}
+
+GetProvpid(){
+  this.provservice.GetProvpu(this.idusuario).subscribe( p => {
+    this.propid = p;
+  })
+}
 FiltrarProvincias(nombre: string) {
   if (!nombre) { 
     this.getpersonas(); 
@@ -99,11 +175,7 @@ const element = document.getElementById('TablaPersonas');
   })
    
 }
-getpersonas(){
-this.service.getpersonas().subscribe(data =>{
-  this.personas = data;
-})
-}
+
 borrar(id:number){
 Swal.fire({
   title:"Seguro",
@@ -115,9 +187,10 @@ Swal.fire({
 }).then((result) =>{
   if(result.isConfirmed){
     this.service.SetPersona(id).subscribe(()=>{
+ this.service.warning("Exito!","Datos borrados existosamente!","green");
 this.getpersonas();
 this.Cantmiembros();
-this.service.warning("Exito!","Datos borrados existosamente!","green");
+
 })
 
   }
