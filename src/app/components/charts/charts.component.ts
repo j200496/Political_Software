@@ -32,13 +32,11 @@ public chartOptions: ChartOptions = {
   series: [{ name: 'Miembros', data: [] }],
   chart: { type: 'bar', height: 350 },
   xaxis: { categories: [] },
-  title: { text: 'Miembros por Provincia' }
+  title: { text: 'Miembros por territorio' }
 };
 
   service = inject(PersonasService);
   router = inject(Router);
-
-
 
   ngOnInit(): void {
     this.service.TotalMiembros().subscribe(m =>{
@@ -62,7 +60,7 @@ public chartOptions: ChartOptions = {
           series: [{ name: 'Miembros', data: cantidades }],
           chart: { type: 'bar', height: 350 },
           xaxis: { categories: categorias },
-          title: { text: 'Miembros por Provincia' }
+          title: { text: 'Miembros por territorio' }
         };
       }
     });

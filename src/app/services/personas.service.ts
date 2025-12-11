@@ -11,7 +11,7 @@ export class PersonasService {
 private urlpersonas = 'https://localhost:7052/api/Personas';
 private urlprovincias = "https://localhost:7052/api/Provicias";
 private totalmiembros = "https://localhost:7052/api/Personas/total";
-private urlchart = 'https://localhost:7052/api/Provicias/miembros-p-provincia';
+private urlchart = 'https://localhost:7052/api/Provicias/miembros-por-provincia';
 private urllistaprovincias = 'https://localhost:7052/api/Personas/Prov';
 
 

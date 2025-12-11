@@ -11,9 +11,14 @@ export class ProvinciasService {
   http = inject(HttpClient);
   //private url1prov = "https://localhost:7052/api/Provicias/listar";
   private urlpostprov = "https://localhost:7052/api/Provicias";
+  private urlprov = 'https://localhost:7052/api/Provicias';
 
+
+EditProv(id: number, prov: any){
+  return this.http.put(`${this.urlpostprov}/Edit/${id}`,prov)
+}
 GetProvincia(){
-  return this.http.get<any>(this.urlpostprov);
+  return this.http.get<any>(this.urlprov);
 }
 GetProvpu(id:number){
 return this.http.get<any>(`${this.urlpostprov}/Getpropu?id=${id}`);

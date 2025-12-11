@@ -8,7 +8,7 @@ import * as FileSaver from 'file-saver';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from "../../Shared/footer/footer.component";
 import { ChartsComponent } from "../charts/charts.component";
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { FormComponent } from '../../Shared/form/form.component';
 import { AuthService } from '../../services/authservice.service';
@@ -17,7 +17,7 @@ import { ProvinciasService } from '../../services/provincias.service';
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent,FooterComponent],
+  imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent, FooterComponent,TitleCasePipe],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -36,12 +36,14 @@ ngOnInit(): void {
   this.SelectPPU();
   this.GetProvpid();
   this.TotalMiembrosPorUs();
+  this.Miembrosporprov();
   //console.log(this.personas)
   //this.Find();
 
 }
 service = inject(PersonasService);
 //Miembros
+totalmiembros: any = [];
 personas: any[] = [];
 personaspu: any[] = [];
 Buscar:string = "";
@@ -61,7 +63,11 @@ FindName(){
     p.nombre.toLowerCase().includes(word)
   );
 }
-
+Miembrosporprov(){
+  this.service.Charts().subscribe( m=> {
+    this.totalmiembros = m;
+})
+}
 FindTerritory(){
   if(this.buscarprov == null){
     this.getpersonas()

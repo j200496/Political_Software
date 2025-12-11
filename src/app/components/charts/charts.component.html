@@ -1,17 +1,14 @@
 <div class="container">
-  <div class="row mt-4">
-    <div class="col-lg-3 text-white">
-      <div class="shadow-lg">
-      <div class="bg-primary rounded-3" >
-        <h5 style="padding: 8%"><i class="bi bi-people-fill fs-3"></i> Total miembros {{total}}</h5>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div>
     <div class="row mt-4">
     <div class="col-lg-12">      
         <div id="chart">
+          <apx-chart
+  #chart
+  [series]="chartOptions.series || []"   
+  [chart]="chartOptions.chart"
+  [xaxis]="chartOptions.xaxis"
+  [title]="chartOptions.title">
+</apx-chart>
 </div>
     </div>
   </div>

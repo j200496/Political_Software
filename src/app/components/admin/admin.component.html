@@ -17,9 +17,9 @@
   <div *ngIf="admin" class="row justify-content-end">
     <div class="col-lg-4">
       <div class="shadow-lg">
-        <div class="bg-success text-white rounded-3">
+        <div style="background-color: rgb(6, 165, 72)" class="text-white rounded-3">
           <h5 style="padding: 8%">
-            <i class="bi bi-people-fill fs-3"></i> Miembros inscritos
+            <i class="bi bi-people-fill fs-3"></i> Total inscritos:
             {{ TotalMiembro }}
           </h5>
         </div>
@@ -81,12 +81,12 @@
           <tbody>
             @for(p of FindPeople; track p.idPersona){
             <tr>
-              <td>{{ p.nombre }}</td>
+              <td>{{ p.nombre | titlecase}}</td>
               <td>{{ p.telefono }}</td>
               <td>{{ p.direccion }}</td>
-              <td>{{ p.cedula }}</td>
-              <td>{{ p.provincia }}</td>
-              <td>{{ p.usuario }}</td>
+              <td>{{ p.cedula | titlecase}}</td>
+              <td>{{ p.provincia | titlecase}}</td>
+              <td>{{ p.usuario | titlecase}}</td>
               <td class="d-flex gap-2 no-export">
                 <button
                   class="btn btn-success"
@@ -116,12 +116,12 @@
     </div>
   </div>
   <div *ngIf="!admin" class="row justify-content-center">
-    <div class="col-lg-5 col-8 col-md-8">
+    <div class="col-lg-4 col-8 col-md-8">
       <h1
         class="text-success mt-4 mb-4 fw-bold"
         style="font-family: Georgia, 'Times New Roman', Times, serif"
       >
-        Panel del compañero
+        Panel del equipo
       </h1>
     </div>
   </div>
@@ -135,7 +135,7 @@
       <div class="shadow-lg">
         <div class="bg-success text-white rounded-3">
           <h5 style="padding: 8%">
-            <i class="bi bi-people-fill fs-3"></i> Miembros inscritos
+            <i class="bi bi-people-fill fs-3"></i> Total inscritos
             {{ total }}
           </h5>
         </div>
@@ -147,6 +147,53 @@
       <h3 class="text-success mt-4 mb-4 fst-italic">
         Lista de todos tus miembros
       </h3>
+    </div>
+  </div>
+  <hr *ngIf="admin">
+  <div *ngIf="admin" class="row justify-content-center">
+      <div class="col-lg-6 col-9">
+      <h2 class="text-success">Total de miembros por territorios</h2>
+    </div>
+  </div>
+  <div *ngIf="admin" class="row justify-content-center">
+    <div class="col-lg-4" *ngFor="let m of totalmiembros">
+      <div class="shadow-lg">
+        <div style="background-color: rgb(6, 165, 72)" class="text-white rounded-3">
+          <h5 style="padding: 8%;">
+           <i class="bi bi-geo-alt-fill"></i> {{m.provincia}}: {{m.cantidad}}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row justify-content-center">
+    <div class="col-lg-2">
+      <h2 class="text-success" >Metas</h2>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-12 mb-2"*ngFor="let m of totalmiembros">
+      <p class="fw-bold">{{ m.provincia }}</p>
+      <p>Meta: {{ m.meta }} miembros</p>
+      <div 
+    class="progress"
+    role="progressbar"
+    aria-label="Example 20px high"
+    [attr.aria-valuenow]="m.cantidad"
+    [attr.aria-valuemin]="0"
+    [attr.aria-valuemax]="m.meta"
+    style="height: 40px"
+  >
+    <div class="progress-bar bg-success" [style.width.%]="(m.cantidad/ m.meta)*100">
+      @if(m.cantidad == m.meta){
+       <span class="text-white">Meta lograda!</span>
+      }@else{
+        <span>{{ m.cantidad }}/{{ m.meta }}</span>
+      }
+   
+    </div>
+</div>
     </div>
   </div>
   <div *ngIf="!admin" class="row justify-content-start mb-2">
