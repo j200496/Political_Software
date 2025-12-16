@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-4">
+        <div class="col-lg-4 col-9">
             <h3 class="text-success mt-4">
                 Asignaciones de territorios
             </h3>
         </div>
     </div>
     <div class="row justify-content-center d-flex gap-4 mt-3">
-          <div class="col-4">
+          <div class="col-lg-4">
 <app-asignaciones
   Lista="Lista de usuarios"
   [data]="usuarios"
@@ -15,9 +15,8 @@
   textField="usuario"
   (SelectIdUsuario)="capturarUsuario($event)">
 </app-asignaciones>
-   
   </div>
-  <div class="col-5">
+  <div class="col-lg-5">
 <app-checklist
   list="territorios"
   [datos]="provincia"
@@ -29,8 +28,8 @@
      </div>
     </div>
     <div class="row justify-content-center mt-3">
-        <div class="col-6">
-            <button class="btn btn-primary w-100" (click)="AsignarProvincias()">Asignar <i class="bi bi-check-lg"></i></button>
+        <div class="col-lg-6 col-10">
+            <button class="btn btn-primary w-100" type="button" (click)="AsignarProvincias()">Asignar <i class="bi bi-check-lg"></i></button>
         </div>
     </div>
 </div>

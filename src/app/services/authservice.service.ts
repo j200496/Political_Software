@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { PersonasService } from './personas.service';
+import { credenciales } from '../components/Core/usuarios';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +10,10 @@ import { Observable, tap } from 'rxjs';
 export class AuthService {
 
   private baseUrl = 'https://localhost:7052/api/Auth';
+  
+  http = inject(HttpClient);
+  alert = inject(PersonasService);
 
-  constructor(private http: HttpClient) {}
 isAdmin(): boolean {
   return localStorage.getItem('rol') === 'Administrador';
 }
@@ -25,9 +29,9 @@ getUserName(){
 GetIdUsuario(){
   return localStorage.getItem('idusuario');
 }
-  login(credenciales: any): Observable<any> {
+  Login(credenciales: credenciales): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credenciales).pipe(
-      tap((resp: any) => {
+      tap((resp: any) => {     
         // Guardar token
         localStorage.setItem('token', resp.token);
 
@@ -47,6 +51,7 @@ GetIdUsuario(){
     localStorage.removeItem('token');
     localStorage.removeItem('rol');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('idusuario');
   }
 
   obtenerToken(): string | null {

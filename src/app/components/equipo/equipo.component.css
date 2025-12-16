@@ -1,0 +1,22 @@
+/* styles.css o el CSS del componente */
+::ng-deep .ng-dropdown-panel {
+  background-color: #f9f9f9!important; /* por ejemplo gris claro */
+}
+/* Ítems de la lista */
+::ng-deep .ng-option {
+  color: #333; /* color del texto */
+  background-color: transparent; /* fondo por defecto del item */
+  padding: 8px 12px;
+}
+
+/* Hover de los ítems */
+::ng-deep .ng-option:hover {
+  background-color: #e0e0e0 !important; /* color al pasar el mouse */
+  color: #000; /* color del texto al hover */
+}
+
+/* Ítem seleccionado */
+::ng-deep .ng-option-selected {
+  background-color: #007bff !important; /* azul de selección */
+  color: #fff !important;
+}

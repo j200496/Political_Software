@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import { PersonasService } from '../../services/personas.service';
 import { RouterLink } from '@angular/router';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { credenciales, usu, usuarios } from '../Core/usuarios';
 
 
 @Component({
@@ -24,7 +25,7 @@ form = new FormGroup({
   contraseña: new FormControl(""),
   rol: new FormControl("Selecciona un rol")
 })
-usuarios: any = [];
+usuarios: usu[] = [];
 id!: number;
 isupdate: boolean = false;
 ngOnInit(): void {
@@ -56,15 +57,15 @@ Saveuser(){
   this.isupdate = false;
   const {usuario, contraseña,rol} = this.form.value;
   if(!usuario || !contraseña || !rol){
-    this.service.warning('Error','Todos los campos son requeridos','red');
+    this.service.error('Error','Todos los campos son requeridos','red');
     return;
   }
   if(rol == 'Selecciona un rol'){
-this.service.warning('Error','Selecciona un rol','red');
+this.service.error('Error','Selecciona un rol','red');
 return;
   }
 if (this.usuarios.some((u:any) => u.contraseña === contraseña)) {
-  this.service.warning("La contraseña ya existe", "Error", "red");
+  this.service.error("La contraseña ya existe", "Error", "red");
   return;
 }
 

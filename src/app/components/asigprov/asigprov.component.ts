@@ -4,7 +4,7 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { ChecklistComponent } from '../../Shared/checklist/checklist.component';
 import { ProvinciasService } from '../../services/provincias.service';
 import { PersonasService } from '../../services/personas.service';
-import { usuarios } from '../provincias/Core/usuarios';
+import { usuarios } from '../Core/usuarios';
 
 @Component({
   selector: 'app-asigprov',
@@ -47,11 +47,12 @@ capturarUsuario(id: number) {
 IdUsuarioSelec = 0;
 AsignarProvincias() {
   const Dto = {
-    idUsuario: this.IdUsuarioSeleccionado,
-    provincias: this.ProvSeleccionadas
+    IdUsuario: this.IdUsuarioSeleccionado,
+    Provincias: this.ProvSeleccionadas
   };
+  console.log(Dto);
   if (!this.IdUsuarioSeleccionado || this.ProvSeleccionadas.length === 0) {
-    this.personasservice.warning("Elija el usuario o territorio!", "Error", "red");
+    this.personasservice.error("Elija el usuario o territorio!", "Error", "red");
     return;
   }
   this.provservice.AsignarProv(Dto).subscribe({

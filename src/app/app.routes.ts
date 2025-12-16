@@ -11,6 +11,8 @@ import { ProvinciasComponent } from './components/provincias/provincias.componen
 import { authGuard } from './guard/auth.guard';
 import { AsigprovComponent } from './components/asigprov/asigprov.component';
 import { AsigusuariosComponent } from './components/asigusuarios/asigusuarios.component';
+import { MainComponent } from './components/main/main.component';
+import { EquipoComponent } from './components/equipo/equipo.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -21,6 +23,7 @@ export const routes: Routes = [
     canActivate: [authGuard],  // ← protección con JWT
     children: [
       { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
+      {path:'equipo',component:EquipoComponent,canActivate:[authGuard]},
       { path: 'home', component: HomeComponent, canActivate: [authGuard] },
       { path: 'update/:id', component: UpdateComponent, canActivate: [authGuard] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [authGuard] },

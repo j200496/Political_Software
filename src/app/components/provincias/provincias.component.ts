@@ -2,9 +2,9 @@ import { Component,inject, OnInit } from '@angular/core';
 import { ProvinciasService } from '../../services/provincias.service';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Provincias } from './Core/Provincias';
+import { Provincias } from '../Core/Provincias';
 import { UsuariosService } from '../../services/usuarios.service';
-import { Province } from './Core/Province';
+import { Province } from '../Core/Province';
 import { PersonasService } from '../../services/personas.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 

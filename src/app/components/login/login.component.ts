@@ -17,11 +17,10 @@ contrasena = '';
 mensajeError = '';
 loading = false;
   alert = inject(PersonasService)
-  constructor(
-    private auth: AuthService,
-    private router: Router
-  ) {}
-
+  auth = inject(AuthService)
+  router = inject(Router)
+  admin = this.auth.isAdmin();
+  equipo = this.auth.isEmpleado();
   login() {
   const body = {
   usuario: this.usuario,
@@ -32,14 +31,28 @@ this.alert.error("Campos vacios!", "Por favor verifique los campos","red");
 return;
 }
   this.loading = true;
-  this.auth.login(body).subscribe({
-      next: () => {
+  this.auth.Login(body).subscribe({
+      next: (resp) => {
           this.loading = false;
+          const rol = resp.rol;
+          if(rol === "Administrador"){
         this.router.navigate(['layout/admin']);
+          }
+          else{
+            this.router.navigate(['layout/equipo']);
+          }
       },
-      error: () => {
-        this.mensajeError = 'Usuario o clave incorrectos';
+        error: (err) => {
+      this.loading = false;
+
+      if (err.status === 401) {
+        this.alert.error('Error','Usuario o contraseña incorrectos!','red');
+        this.mensajeError = 'Usuario o contraseña incorrectos';
+      } else {
+         this.alert.error('Error','Error del servidor, intente más tarde!','red');
+        this.mensajeError = 'Error del servidor, intente más tarde';
       }
-    });
-  }
+    }
+  });
+}
 }

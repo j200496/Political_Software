@@ -1,27 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PersonasService } from '../../services/personas.service';
-import { inject, Injectable } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { ProvinciasService } from '../../services/provincias.service';
+import { AuthService } from '../../services/authservice.service';
+import { PersonasService } from '../../services/personas.service';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
-import { FormsModule } from '@angular/forms';
-import { FooterComponent } from "../../Shared/footer/footer.component";
-import { ChartsComponent } from "../charts/charts.component";
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
-import { FormComponent } from '../../Shared/form/form.component';
-import { AuthService } from '../../services/authservice.service';
-import { ProvinciasService } from '../../services/provincias.service';
-
+import { NgSelectComponent } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-admin',
-  imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent, FooterComponent,TitleCasePipe],
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css'
+  selector: 'app-equipo',
+  imports: [RouterLink,CommonModule,NgSelectComponent,FormsModule],
+  templateUrl: './equipo.component.html',
+  styleUrl: './equipo.component.css'
 })
-export class AdminComponent implements OnInit{
+export class EquipoComponent {
+
 provservice = inject(ProvinciasService)
 TotalMiembro: number = 0;
 auth = inject(AuthService)
@@ -34,8 +30,8 @@ ngOnInit(): void {
   this.getpersonas();
   this.Cantmiembros();
   this.GetProv();
-  //this.SelectPPU();
- // this.GetProvpid();
+  this.SelectPPU();
+  this.GetProvpid();
   this.TotalMiembrosPorUs();
   this.Miembrosporprov();
   //console.log(this.title)
@@ -204,11 +200,5 @@ this.Cantmiembros();
 })
  
 }
-cargarpersona(id: number){
-  this.service.getpersona(id).subscribe({
-    next:(data)=>{
-      console.log(data)
-    }
-  })
-}
+
 }
