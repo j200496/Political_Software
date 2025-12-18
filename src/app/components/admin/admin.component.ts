@@ -17,7 +17,8 @@ import { ProvinciasService } from '../../services/provincias.service';
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent, FooterComponent,TitleCasePipe],
+  imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent, FooterComponent, 
+    TitleCasePipe, ChartsComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })

@@ -46,9 +46,9 @@ public chartOptions: ChartOptions = {
   }
 
   CargarDatos(){
-    this.service.Charts().subscribe((res) => {
+    this.service.Chart().subscribe((res) => {
       const categorias = res.map((x: any) => x.provincia);
-      const cantidades = res.map((x: any) => x.cantidadMiembros);
+      const cantidades = res.map((x: any) => x.cantidad);
 
       if (this.chart) {
         // refresca el chart ya renderizado

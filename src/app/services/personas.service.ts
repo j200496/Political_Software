@@ -12,6 +12,7 @@ private urlpersonas = 'https://localhost:7052/api/Personas';
 private urlprovincias = "https://localhost:7052/api/Provicias";
 private totalmiembros = "https://localhost:7052/api/Personas/total";
 private urlchart = 'https://localhost:7052/api/Provicias/miembros-por-provincia';
+private urlcharts = 'https://localhost:7052/api/Provicias/miembros-por-prov';
 private urllistaprovincias = 'https://localhost:7052/api/Personas/Prov';
 
 
@@ -20,6 +21,9 @@ route = inject(Router);
 
 Charts(): Observable<any>{
   return this.http.get<any>(this.urlchart);
+}
+Chart(): Observable<any>{
+  return this.http.get<any>(this.urlcharts);
 }
 GettotalMiembrosPorUsuario(id:number){
   return this.http.get<any>(`${this.urlpersonas}/Totalppu?id=${id}`);

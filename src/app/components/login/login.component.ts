@@ -44,7 +44,6 @@ return;
       },
         error: (err) => {
       this.loading = false;
-
       if (err.status === 401) {
         this.alert.error('Error','Usuario o contraseña incorrectos!','red');
         this.mensajeError = 'Usuario o contraseña incorrectos';
