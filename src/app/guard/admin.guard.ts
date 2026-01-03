@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
 @Injectable({
@@ -6,7 +6,7 @@ import { CanActivate, Router } from '@angular/router';
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(private router: Router) {}
+  router = inject(Router)
 
   canActivate(): boolean {
     if (localStorage.getItem('rol') === 'Administrador') {

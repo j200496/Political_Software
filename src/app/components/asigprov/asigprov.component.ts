@@ -5,10 +5,11 @@ import { ChecklistComponent } from '../../Shared/checklist/checklist.component';
 import { ProvinciasService } from '../../services/provincias.service';
 import { PersonasService } from '../../services/personas.service';
 import { usuarios } from '../Core/usuarios';
+import { FooterComponent } from '../../Shared/footer/footer.component';
 
 @Component({
   selector: 'app-asigprov',
-  imports: [AsignacionesComponent,ChecklistComponent],
+  imports: [AsignacionesComponent,ChecklistComponent,FooterComponent],
   templateUrl: './asigprov.component.html',
   styleUrl: './asigprov.component.css'
 })

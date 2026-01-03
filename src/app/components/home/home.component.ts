@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormComponent } from "../../Shared/form/form.component";
 import { PersonasService } from '../../services/personas.service';
+import { FooterComponent } from '../../Shared/footer/footer.component';
 
 
 @Component({

@@ -7,10 +7,11 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { Province } from '../Core/Province';
 import { PersonasService } from '../../services/personas.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { FooterComponent } from '../../Shared/footer/footer.component';
 
 @Component({
   selector: 'app-provincias',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,TitleCasePipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,TitleCasePipe,FooterComponent],
   templateUrl: './provincias.component.html',
   styleUrl: './provincias.component.css'
 })

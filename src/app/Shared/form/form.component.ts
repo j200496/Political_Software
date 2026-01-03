@@ -3,13 +3,14 @@ import { Component, EventEmitter, Input, model, OnInit, Output } from '@angular/
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PersonasService } from '../../services/personas.service';
 import { inject, Injectable } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/authservice.service';
 import { ProvinciasService } from '../../services/provincias.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-form',
-  imports: [ReactiveFormsModule,CommonModule,FormsModule,RouterLink],
+  imports: [ReactiveFormsModule,CommonModule,FormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
@@ -32,6 +33,7 @@ usuariosform = new FormGroup({
   nombre: new FormControl(""),
   telefono: new FormControl(""),
   direccion: new FormControl(''),
+  genero: new FormControl(''),
   cedula: new FormControl("",[Validators.required, Validators.minLength(11)]),
   idProvincia: new FormControl(null) 
 });
@@ -45,20 +47,30 @@ titulo!: string;
 @Output() metodo = new EventEmitter<any>();
 service = inject(PersonasService)
 auth = inject (AuthService)
+route = inject(Router)
 provservice = inject(ProvinciasService)
 provincias: any = [];
 provpid: any = [];
 idusuario = Number(this.auth.GetIdUsuario())
 admin = this.auth.isAdmin()
 @Input() btncancel: boolean = false;
+
+Ruta(){
+  const rol = localStorage.getItem('rol');
+  if(rol == 'Administrador'){
+   this.route.navigateByUrl('layout/admin')
+  }else{
+    this.route.navigateByUrl('layout/equipo')
+  }
+}
 Getpropid(){
   this.provservice.GetProvpu(this.idusuario).subscribe(p => {
     this.provpid = p;
   })
 }
 guardar(){
-  const {nombre,telefono,direccion,cedula, idProvincia} = this.usuariosform.value;
-  if(!nombre || !telefono || !direccion || !cedula){
+  const {nombre,telefono,direccion,cedula, genero, idProvincia} = this.usuariosform.value;
+  if(!nombre || !telefono || !direccion || !cedula || !genero){
     this.service.error("Todos los campos son requeridos","Error!","red");
     return;
   }
@@ -72,7 +84,8 @@ if(!idProvincia){
     nombre:'',
     telefono:'',
     direccion:'',
-    cedula:''
+    cedula:'',
+    genero:''
    })
 
 }

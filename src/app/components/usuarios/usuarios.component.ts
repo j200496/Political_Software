@@ -6,11 +6,12 @@ import { PersonasService } from '../../services/personas.service';
 import { RouterLink } from '@angular/router';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { credenciales, usu, usuarios } from '../Core/usuarios';
+import { FooterComponent } from '../../Shared/footer/footer.component';
 
 
 @Component({
   selector: 'app-usuarios',
-  imports: [CommonModule,ReactiveFormsModule,FormsModule],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule,FooterComponent],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })

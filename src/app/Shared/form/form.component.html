@@ -1,21 +1,82 @@
-<h2 class="text-center text-success fw-bold mt-5">{{titulo}} <i class="bi bi-person-plus-fill"></i></h2>
-<form [formGroup]="usuariosform" (submit)="guardar()" >
-  <select *ngIf="admin" class=" form form-control mb-3" formControlName="idProvincia">
+<h2 class="text-center text-success fw-bold mt-5">
+  {{ titulo }} <i class="bi bi-person-plus-fill"></i>
+</h2>
+<form [formGroup]="usuariosform" (submit)="guardar()">
+  <select
+    *ngIf="admin"
+    class="form form-control mb-3"
+    formControlName="idProvincia"
+  >
     <option [ngValue]="null">Elija el territorio</option>
     @for(p of provincias; track p.idProvincia){
-      <option [value]="p.idProvincia">{{p.nombre}}</option>
+    <option [value]="p.idProvincia">{{ p.nombre }}</option>
     }
   </select>
-   <select *ngIf="!admin" class=" form form-control mb-3" formControlName="idProvincia">
+  <select
+    *ngIf="!admin"
+    class="form form-control mb-3"
+    formControlName="idProvincia"
+  >
     <option [ngValue]="null">Elija el territorio</option>
     @for(p of provpid; track p.idProvincia){
-      <option [value]="p.idProvincia">{{p.nombre}}</option>
+    <option [value]="p.idProvincia">{{ p.nombre }}</option>
     }
   </select>
-    <input class="form form-control mb-3" formControlName="nombre" type="text" placeholder="Nombre">
-    <input class="form form-control mb-3" formControlName="telefono"  type="text" placeholder="Telefono">
-     <input class="form form-control mb-3" formControlName="direccion" type="text" placeholder="Direccion">
-    <input class="form form-control mb-3" formControlName="cedula" type="text" placeholder="Colegio electoral">
-     <button type="submit" [ngClass]="btncolor">{{btn}} <i class="bi bi-check"></i></button>
-     <button *ngIf="btncancel" [ngClass]="btncolor2" routerLink="/layout/admin">{{btn2}}</button>
+  <input
+    class="form form-control mb-3"
+    formControlName="nombre"
+    type="text"
+    placeholder="Nombre"
+  />
+  <input
+    class="form form-control mb-3"
+    formControlName="telefono"
+    type="text"
+    placeholder="Telefono"
+  />
+  <input
+    class="form form-control mb-3"
+    formControlName="direccion"
+    type="text"
+    placeholder="Direccion"
+  />
+  <input
+    class="form form-control mb-3"
+    formControlName="cedula"
+    type="text"
+    placeholder="Colegio electoral"
+  />
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      formControlName="genero"
+      value="M"
+      id="generoM"
+     />
+    <label class="form-check-label" for="generoM"> Masculino </label>
+  </div>
+
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      formControlName="genero"
+      value="F"
+      id="generoF"
+    />
+    <label class="form-check-label" for="generoF"> Femenino </label>
+  </div>
+
+  <button type="submit" [ngClass]="btncolor">
+    {{ btn }} <i class="bi bi-check"></i>
+  </button>
+  <button
+    *ngIf="btncancel"
+    [ngClass]="btncolor2"
+    type="button"
+    (click)="Ruta()"
+  >
+    {{ btn2 }}
+  </button>
 </form>

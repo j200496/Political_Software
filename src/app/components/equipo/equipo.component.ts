@@ -9,10 +9,11 @@ import * as FileSaver from 'file-saver';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from '../../Shared/footer/footer.component';
 
 @Component({
   selector: 'app-equipo',
-  imports: [RouterLink,CommonModule,NgSelectComponent,FormsModule],
+  imports: [RouterLink,CommonModule,NgSelectComponent,FormsModule,FooterComponent],
   templateUrl: './equipo.component.html',
   styleUrl: './equipo.component.css'
 })

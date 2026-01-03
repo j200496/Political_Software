@@ -14,6 +14,7 @@ private totalmiembros = "https://localhost:7052/api/Personas/total";
 private urlchart = 'https://localhost:7052/api/Provicias/miembros-por-provincia';
 private urlcharts = 'https://localhost:7052/api/Provicias/miembros-por-prov';
 private urllistaprovincias = 'https://localhost:7052/api/Personas/Prov';
+private urlpersonasporgenero = 'https://localhost:7052/api/Personas/miembros-por-genero';
 
 
 http = inject(HttpClient);
@@ -22,13 +23,16 @@ route = inject(Router);
 Charts(): Observable<any>{
   return this.http.get<any>(this.urlchart);
 }
+GetMiembrosPorGenero(): Observable<any>{
+  return this.http.get<any>(this.urlpersonasporgenero);
+}
 Chart(): Observable<any>{
   return this.http.get<any>(this.urlcharts);
 }
 GettotalMiembrosPorUsuario(id:number){
   return this.http.get<any>(`${this.urlpersonas}/Totalppu?id=${id}`);
 }
-GetPPU(id:number){
+GetPPU(id:number): Observable<any>{
   return this.http.get<any>(`${this.urlpersonas}/Selectppu?id=${id}`);
 }
 TotalMiembros(): Observable<any>{
@@ -43,7 +47,7 @@ return this.http.get<any[]>(`${this.urlprovincias}/filtrar-por-nombre?name=${nom
 FiltrarPersonas(nombre: string) {
   return this.http.get<any[]>(`${this.urlpersonas}/filter?name=${nombre}`);
 }
-GetProvincias(){
+GetProvincias(): Observable<any>{
   return this.http.get<any>(this.urllistaprovincias);
 }
  warning(title:string, text:string, btncolor:string){

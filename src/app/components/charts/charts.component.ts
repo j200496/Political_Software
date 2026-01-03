@@ -32,7 +32,7 @@ public chartOptions: ChartOptions = {
   series: [{ name: 'Miembros', data: [] }],
   chart: { type: 'bar', height: 350 },
   xaxis: { categories: [] },
-  title: { text: 'Miembros por territorio' }
+  title: { text: 'Miembros por genero' }
 };
 
   service = inject(PersonasService);
@@ -42,9 +42,29 @@ public chartOptions: ChartOptions = {
     this.service.TotalMiembros().subscribe(m =>{
       this.total = m;
     });
-    this.CargarDatos();
+    this.CargarDatosPorGenero();
+    //this.CargarDatos();
   }
+  CargarDatosPorGenero(){
+    this.service.GetMiembrosPorGenero().subscribe((res) => {
+      const genero = res.map((x: any) => x.genero);
+      const cantidades = res.map((x: any) => x.cantidad);
 
+      if (this.chart) {
+        // refresca el chart ya renderizado
+        this.chart.updateOptions({ xaxis: { categories: genero } });
+        this.chart.updateSeries([{ name: 'Miembros', data: cantidades }]);
+      } else {
+        // primera carga
+        this.chartOptions = {
+          series: [{ name: 'Miembros'+ genero, data: cantidades }],
+          chart: { type: 'bar', height: 350 },
+          xaxis: { categories: genero },
+          title: { text: 'Miembros por genero' }
+        };
+      }
+    });
+  }
   CargarDatos(){
     this.service.Chart().subscribe((res) => {
       const categorias = res.map((x: any) => x.provincia);

@@ -2,7 +2,7 @@ import { Component, inject, Input, numberAttribute, OnInit } from '@angular/core
 import { PersonasService } from '../../services/personas.service';
 import { FormComponent } from "../../Shared/form/form.component";
 import { Router } from '@angular/router';
-import { FooterComponent } from "../../Shared/footer/footer.component";
+
 
 @Component({
   selector: 'app-update',
