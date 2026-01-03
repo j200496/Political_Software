@@ -175,10 +175,11 @@ const element = document.getElementById('TablaPersonas');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Provincias');
-
+     const date = new Date();
+     const fechaactual = date.getDate();
     const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     const blob: Blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
-    FileSaver.saveAs(blob, 'Personas.xlsx');
+    FileSaver.saveAs(blob, 'Miembros.xlsx');
     }
   })
    

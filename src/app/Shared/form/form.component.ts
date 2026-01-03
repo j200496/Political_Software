@@ -85,7 +85,8 @@ if(!idProvincia){
     telefono:'',
     direccion:'',
     cedula:'',
-    genero:''
+    genero:'',
+    idProvincia: null
    })
 
 }
