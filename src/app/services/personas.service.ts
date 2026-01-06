@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { CantidadpGenero } from '../components/Core/CantidadpGenero';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,8 @@ route = inject(Router);
 Charts(): Observable<any>{
   return this.http.get<any>(this.urlchart);
 }
-GetMiembrosPorGenero(): Observable<any>{
-  return this.http.get<any>(this.urlpersonasporgenero);
+GetMiembrosPorGenero(): Observable<CantidadpGenero[]>{
+  return this.http.get<CantidadpGenero[]>(this.urlpersonasporgenero);
 }
 Chart(): Observable<any>{
   return this.http.get<any>(this.urlcharts);

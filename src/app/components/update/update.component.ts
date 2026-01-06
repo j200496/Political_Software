@@ -24,8 +24,8 @@ route = inject(Router);
 
 guardar(person:any){
   this.servicio.actualizar(this.id,person).subscribe(() =>{
-    this.servicio.warning("Exito!","Datos actualizados!","green");
- this.route.navigateByUrl('/layout/admin')
+    this.servicio.success("Exito!","Datos actualizados!","green");
+ this.route.navigateByUrl('/layout/equipo')
   })
 }
 }

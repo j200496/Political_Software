@@ -13,12 +13,13 @@ import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent 
 import { FormComponent } from '../../Shared/form/form.component';
 import { AuthService } from '../../services/authservice.service';
 import { ProvinciasService } from '../../services/provincias.service';
+import { PiechartComponent } from '../../Shared/piechart/piechart.component';
 
 
 @Component({
   selector: 'app-admin',
   imports: [RouterLink, FormsModule, CommonModule, NgSelectComponent, FooterComponent, 
-    TitleCasePipe, ChartsComponent],
+    TitleCasePipe, PiechartComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -196,7 +197,7 @@ Swal.fire({
 }).then((result) =>{
   if(result.isConfirmed){
     this.service.SetPersona(id).subscribe(()=>{
- this.service.warning("Exito!","Datos borrados existosamente!","green");
+ this.service.success("Exito!","Datos borrados existosamente!","green");
 this.getpersonas();
 this.Cantmiembros();
 

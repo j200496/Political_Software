@@ -6,7 +6,6 @@ import { inject, Injectable } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/authservice.service';
 import { ProvinciasService } from '../../services/provincias.service';
-import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-form',
@@ -33,8 +32,8 @@ usuariosform = new FormGroup({
   nombre: new FormControl(""),
   telefono: new FormControl(""),
   direccion: new FormControl(''),
-  genero: new FormControl(''),
-  cedula: new FormControl("",[Validators.required, Validators.minLength(11)]),
+  genero: new FormControl('M'),
+  cedula: new FormControl(""),
   idProvincia: new FormControl(null) 
 });
 @Input()
@@ -44,6 +43,7 @@ titulo!: string;
 @Input() btncolor2!: string;
 @Input() titulo2!: string;
 @Input() btn2!:string;
+@Input() icono!:string;
 @Output() metodo = new EventEmitter<any>();
 service = inject(PersonasService)
 auth = inject (AuthService)
@@ -85,7 +85,7 @@ if(!idProvincia){
     telefono:'',
     direccion:'',
     cedula:'',
-    genero:'',
+    genero:'M',
     idProvincia: null
    })
 

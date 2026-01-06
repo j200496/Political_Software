@@ -58,7 +58,7 @@ AsignarProvincias() {
   }
   this.provservice.AsignarProv(Dto).subscribe({
     next: (res) => {
-      this.personasservice.success("Asignación con éxito!", "Provincias asignadas exitosamente!", "green");
+      this.personasservice.success("Asignación con éxito!", "Territorio asignadas exitosamente a!", "green");
     },
     error: (err) => {
       console.error("Error en la asignación:", err);

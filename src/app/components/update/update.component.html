@@ -1,9 +1,9 @@
 @if(modelo){
    <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12 mt-4">
-             <app-form btn="Actualizar" btncolor="btn btn-success w-100" 
-             btn2="Cancelar" [btncancel]="true" btncolor2="btn btn-danger w-100 mt-3" titulo="Formulario"[modelo]="modelo" (metodo)="guardar($event)"></app-form>
+        <div class="col-12">
+             <app-form btn="Editar" btncolor="btn btn-success w-100" 
+             btn2="Cancelar" [btncancel]="true" icono="bi bi-check-circle-fill" btncolor2="btn btn-danger w-100 mt-3" titulo="Actualizar datos"[modelo]="modelo" (metodo)="guardar($event)"></app-form>
         </div>
     </div>
    </div>>
